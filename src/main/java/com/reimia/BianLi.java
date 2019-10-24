@@ -1,4 +1,4 @@
-package com.Reimia;
+package com.reimia;
 
 import java.io.*;
 
