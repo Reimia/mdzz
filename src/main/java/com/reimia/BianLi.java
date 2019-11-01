@@ -22,6 +22,7 @@ public class BianLi {
         for (File f : fs) {
             if (f.isDirectory())    //若是目录，则递归打印该目录下的文件
             {
+                System.out.println(f.getName()+"我是文件夹名字");
                 func(f, fileOut);
             }
             if (f.isFile())        //若是文件，直接打印
