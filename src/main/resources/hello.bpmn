@@ -6,7 +6,6 @@
     <userTask activiti:exclusive="true" id="_4" name="UserTask"/>
     <sequenceFlow id="_5" sourceRef="_2" targetRef="_4"/>
     <sequenceFlow id="_6" sourceRef="_4" targetRef="_3"/>
-    <scriptTask activiti:exclusive="true" id="_7" name="ScriptTask"/>
   </process>
   <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
     <bpmndi:BPMNPlane bpmnElement="myProcess_1">
@@ -24,12 +23,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_4" id="Shape-_4">
         <dc:Bounds height="55.0" width="85.0" x="165.0" y="140.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_7" id="Shape-_7">
-        <dc:Bounds height="55.0" width="85.0" x="305.0" y="140.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>

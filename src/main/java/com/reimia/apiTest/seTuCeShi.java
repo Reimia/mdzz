@@ -9,29 +9,25 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class seTuCeShi {
-    public static JSONObject result(String info) {
+    private static JSONObject result() {
         //接口地址
         String requestUrl = "https://api.lolicon.app/setu";
         //params用于存储要请求的参数
-        Map params = new HashMap();
-//        //showapi_appid的值，把###替换成你的appid
-//        params.put("showapi_appid","###");
-//        //我们请求的字符串
-//        params.put("info",info);
-//        //数字签名，###填你的数字签名，可以在你的个人中心看到
-//        params.put("showapi_sign","###");
-//        //调用httpRequest方法，这个方法主要用于请求地址，并加上请求参数
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("r18","false");
+
         String string = httpRequest(requestUrl,params);
         //处理返回的JSON数据并返回
-        JSONObject pageBean = JSONObject.parseObject(string);
-        return pageBean;
+        return JSONObject.parseObject(string);
     }
 
-    private static String httpRequest(String requestUrl,Map params) {
+    private static String httpRequest(String requestUrl, Map<String, Object> params) {
         //buffer用于接受返回的字符
         StringBuilder buffer = new StringBuilder();
         try {
@@ -45,11 +41,11 @@ public class seTuCeShi {
 
             //获得输入
             InputStream inputStream = httpUrlConn.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             //将bufferReader的值给放到buffer里
-            String str = null;
+            String str;
             while ((str = bufferedReader.readLine()) != null) {
                 buffer.append(str);
             }
@@ -57,7 +53,6 @@ public class seTuCeShi {
             bufferedReader.close();
             inputStreamReader.close();
             inputStream.close();
-            inputStream = null;
             //断开连接
             httpUrlConn.disconnect();
 
@@ -68,10 +63,10 @@ public class seTuCeShi {
         return buffer.toString();
     }
 
-    public static String urlencode(Map<String,Object>data) {
+    private static String urlencode(Map<String, Object> data) {
         //将map里的参数变成像 showapi_appid=###&showapi_sign=###&的样子
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry i : data.entrySet()) {
+        for (Map.Entry<String, Object> i : data.entrySet()) {
             try {
                 sb.append(i.getKey()).append("=").append(URLEncoder.encode(i.getValue()+"","UTF-8")).append("&");
             } catch (UnsupportedEncodingException e) {
@@ -83,6 +78,6 @@ public class seTuCeShi {
     //测试是否有效
     public static void main(String[] args) {
 
-        System.out.println(result("你好啊"));
+        System.out.println(result());
     }
 }
