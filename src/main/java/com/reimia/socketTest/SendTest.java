@@ -1,6 +1,10 @@
 package com.reimia.socketTest;
 
-import java.io.OutputStream;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -18,7 +22,7 @@ public class SendTest {
     }
 
     private void sendMsg() throws Exception {
-        Socket socket = new Socket("127.0.0.1", 20003);
+        Socket socket = new Socket("192.168.69.78", 50000);
         System.out.println("client start ...");
         OutputStream out = socket.getOutputStream();
 
@@ -40,7 +44,10 @@ public class SendTest {
 //        System.out.println(new String(all));
 //        dos.close();
 //        InputStream in = socket.getInputStream();
-        byte[] x ="30/aaaaaaaaaaaaaaaaaaaaaaaaaaaaa".getBytes(StandardCharsets.UTF_8);
+
+//        String s = "CC DD A1 01 FF FF FF FF 9E 3C";
+        String s = "CC DD C0 01 00 00 0D CE 9C";
+        byte[] x = hexStringToByteArray(s);
         out.write(x);
         System.out.println("Client:" + Arrays.toString(x));
 //        byte[] header = new byte[8];
@@ -48,8 +55,17 @@ public class SendTest {
 //        String head = new String(header);
 //        System.out.println("Server:" + head);
 //        in.close();
-        out.close();
-        socket.close();
+
+        InputStream inputStream = socket.getInputStream();
+        byte[] bytes = new byte[1024];
+        int len;
+        StringBuilder sb = new StringBuilder();
+        while ((len = inputStream.read(bytes)) != -1) {
+            //注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
+            sb.append(new String(bytes, 0, len));
+        }
+        System.out.println("get message from server: " + sb);
+
 
 //        PrintWriter write = new PrintWriter(socket.getOutputStream());
 //        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -62,8 +78,34 @@ public class SendTest {
 //        System.out.println("Server:" + in.readLine());
 //        write.close();
 //        in.close();
+        out.close();
+        socket.close();
+
+    }
 
 
+    public static byte[] hexStringToByteArray(String hexString) {
+        hexString = hexString.replaceAll(" ", "");
+        int len = hexString.length();
+        byte[] bytes = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个字节
+            bytes[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4) + Character
+                    .digit(hexString.charAt(i + 1), 16));
+        }
+        return bytes;
+    }
+
+    public static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(0xFF & bytes[i]);
+            if (hex.length() == 1) {
+                sb.append('0');
+            }
+            sb.append(hex);
+        }
+        return sb.toString();
     }
 
     private String dealName(String filename) {

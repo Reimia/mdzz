@@ -34,7 +34,13 @@ public class HttpSend {
 
         System.out.println("mdzzzzzzzzzzzz");
         OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream(), StandardCharsets.UTF_8);
-        out.write("mdzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        out.write("{\n" +
+                "    \"id\": \"mdzz\",\n" +
+                "    \"msgType\": \"ceshi\",\n" +
+                "    \"shelfCode\": \"00000081\",\n" +
+                "    \"x\": 46,\n" +
+                "    \"y\": 61\n" +
+                "}");
         out.flush();
         out.close();
 
