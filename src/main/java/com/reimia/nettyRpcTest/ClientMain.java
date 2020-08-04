@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ClientMain {
 
     public static void main(String[] args) throws Exception{
-        NettyClient client = new NettyClient("127.0.0.1",9090);
+        NettyClient client = new NettyClient("127.0.0.1",8080);
         //启动client服务
         client.start();
 

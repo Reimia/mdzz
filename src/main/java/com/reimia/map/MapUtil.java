@@ -1,7 +1,8 @@
 package com.reimia.map;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.junit.Test;
+
+import java.util.*;
 
 public class MapUtil {
 
@@ -30,9 +31,62 @@ public class MapUtil {
             String map2KeyVal = map2Key + ":" + map2Value;
             boolean keyExist = mapA.containsKey(map2KeyVal);
             boolean valExist = mapA.containsValue(map2KeyVal);
-            if (!keyExist){
+            if (!keyExist) {
                 System.out.println("map1 不包含 map2");
             }
         }
+    }
+
+    @Test
+    public void test() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String item = iterator.next();
+            if ("1".equals(item)) {
+                iterator.remove();
+            }
+        }
+
+        for (String item : list) {
+            if ("2".equals(item)) {
+                list.remove(item);
+            }
+        }
+
+        System.out.println(list);
+    }
+
+    @Test
+    public void test2() {
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("111", "111");
+
+        Map<String, String> map2 = new HashMap<>();
+        map1.put("111", "112");
+        map1.put("112", "113");
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.putAll(map1);
+        map3.putAll(map2);
+
+        System.out.println(1);
+    }
+
+    /**
+     * 翻转一个long类型数字。例如输入123456L，输出654321L
+     */
+    @Test
+    public void test3() {
+        Long l = 1234567891111111119L;
+        String s = String.valueOf(l);
+        StringBuffer s1 =new StringBuffer();
+        for (int i = s.length(); i >0; i--) {
+           s1.append(s.charAt(i-1));
+        }
+        Long l1 = Long.parseLong(String.valueOf(s1));
+        System.out.println(l1);
     }
 }
