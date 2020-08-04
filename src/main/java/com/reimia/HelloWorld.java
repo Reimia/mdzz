@@ -11,6 +11,6 @@ public class HelloWorld {
         System.out.println(Charset.defaultCharset());
         System.out.println(System.getProperty("user.dir"));
         System.out.println("Hello World");
-        System.out.println("中文1");
+        System.out.println("中文");
     }
 }
