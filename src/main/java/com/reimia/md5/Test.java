@@ -10,7 +10,7 @@ import java.util.Date;
 public class Test {
 
     public static void main(String[] args) {
-        String s = encryptData("root");
+        String s = encryptData("tbrain");
         System.out.println(s);
     }
 

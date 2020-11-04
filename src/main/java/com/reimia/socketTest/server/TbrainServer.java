@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 
 public class TbrainServer {
     public static void main(String[] arg) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(9999), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/", new HttpServerTest.TestHandler());
         server.start();
     }

@@ -13,10 +13,11 @@ import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class RmsServer {
     public static void main(String[] args) throws IOException {
-        HttpServer server2 = HttpServer.create(new InetSocketAddress(48322), 0);
+        HttpServer server2 = HttpServer.create(new InetSocketAddress(8895), 0);
         server2.createContext("/", new TestHandler());
         server2.start();
     }
@@ -25,6 +26,8 @@ public class RmsServer {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             System.out.println("receive message from: "+ exchange.getRequestURI());
+            Random random = new Random();
+            int i = random.nextInt(100);
 
             String s = "{\n" +
                     "    \"id\": \"geekCode_geekWarehouseCode_001\",\n" +
@@ -36,7 +39,7 @@ public class RmsServer {
                     "            \"msg\": \"Success\"\n" +
                     "        },\n" +
                     "        \"body\": {\n" +
-                    "            \"taskId\": 37\n" +
+                    "            \"taskId\": "+i+"\n" +
                     "        }\n" +
                     "    }\n" +
                     "}";
