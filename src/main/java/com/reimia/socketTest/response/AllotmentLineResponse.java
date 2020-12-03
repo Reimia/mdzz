@@ -14,7 +14,7 @@ public class AllotmentLineResponse {
         class Header {
             String responseId = UUID.randomUUID().toString();
             int code = 0;
-            String msg = "成功";
+            String msg = "success";
 
             public String getResponseId() {
                 return responseId;
