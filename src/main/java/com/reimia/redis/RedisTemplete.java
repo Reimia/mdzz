@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.io.Serializable;
 
-@Configuration
+//@Configuration
 public class RedisTemplete {
 
     @Bean("redisTemplate")

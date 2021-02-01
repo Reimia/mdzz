@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<command className="com.reimia.xmlResolve2.AllotmentOrderSendCommand">
+		<!-- scopeTo 数据范围 B 业务变量，L 局部变量 -->
+		<map scopeFrom="String" valueFrom="ORDER_SEND" scopeTo="B" valueTo="content.request.request.body.taskType"/>
+		<map scopeFrom="Command" valueFrom="order" scopeTo="B" valueTo="content.request.request.body.order"/>
+		<map scopeFrom="Command" valueFrom="printInfo" scopeTo="B" valueTo="content.request.request.body.printInfo"/>
+	</command>
+</root>

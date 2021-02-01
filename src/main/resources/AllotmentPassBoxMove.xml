@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rules>
+	<rule id="AllotmentPassBoxMove" device="com.zjft.ucp.stdapp.orche.device.allotment.device.AllotmentLineDevice"
+		  event="com.zjft.ucp.stdapp.orche.device.allotment.event.AllotmentMatterAddRemoveEvent"/>
+
+	<rule id="Task_00h2duo" device="com.zjft.ucp.stdapp.orche.device.rms.device.RmsDevice"
+		  event="com.zjft.ucp.stdapp.orche.device.rms.event.DeliverBox_BoxArrived_Event">
+		if(event.contextID == command.contextID) 'true'
+	</rule>
+
+	<rule id="Task_0ml1hy7" device="com.zjft.ucp.stdapp.orche.device.rms.device.RmsDevice"
+		  event="com.zjft.ucp.stdapp.orche.device.rms.event.DeliverBox_BoxArrived_Event">
+		if(event.contextID == command.contextID) 'true'
+	</rule>
+</rules>

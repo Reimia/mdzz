@@ -5,7 +5,7 @@ import org.springframework.data.redis.listener.KeyExpirationEventMessageListener
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class RedisListener extends KeyExpirationEventMessageListener {
     public RedisListener(RedisMessageListenerContainer listenerContainer) {
         super(listenerContainer);
