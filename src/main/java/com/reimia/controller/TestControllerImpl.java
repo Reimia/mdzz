@@ -1,4 +1,4 @@
-package com.reimia.Controller;
+package com.reimia.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

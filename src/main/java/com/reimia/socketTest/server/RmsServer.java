@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.apache.commons.io.IOUtils;
+import org.intellij.lang.annotations.Language;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -22,34 +23,34 @@ public class RmsServer {
         server2.start();
     }
 
-    static  class TestHandler implements HttpHandler {
+    static class TestHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            System.out.println("receive message from: "+ exchange.getRequestURI());
+            System.out.println("receive message from: " + exchange.getRequestURI());
             Random random = new Random();
             int i = random.nextInt(100);
 
-            String s = "{\n" +
-                    "    \"id\": \"geekCode_geekWarehouseCode_001\",\n" +
-                    "    \"msgType\": \"RobotTaskResponseMsg\",\n" +
-                    "    \"response\": {\n" +
-                    "        \"header\": {\n" +
-                    "            \"responseId\": \"a5a3eb48-1e10-4829-80cb-3b181d5339ad\",\n" +
-                    "            \"code\": 0,\n" +
-                    "            \"msg\": \"Success\"\n" +
-                    "        },\n" +
-                    "        \"body\": {\n" +
-                    "            \"taskId\": "+i+"\n" +
-                    "        }\n" +
+            @Language("JSON") String s = "{\n" +
+                    "  \"id\": \"geekCode_geekWarehouseCode_001\",\n" +
+                    "  \"msgType\": \"RobotTaskResponseMsg\",\n" +
+                    "  \"response\": {\n" +
+                    "    \"header\": {\n" +
+                    "      \"responseId\": \"a5a3eb48-1e10-4829-80cb-3b181d5339ad\",\n" +
+                    "      \"code\": 0,\n" +
+                    "      \"msg\": \"Success\"\n" +
+                    "    },\n" +
+                    "    \"body\": {\n" +
+                    "      \"taskId\": " + i + "\n" +
                     "    }\n" +
+                    "  }\n" +
                     "}";
             JSONObject jsonObject = JSONObject.parseObject(s);
             String response = JSONObject.toJSONString(jsonObject);
             String requestBody = IOUtils.toString(exchange.getRequestBody(), Charset.defaultCharset());
             SimpleDateFormat sdf = new SimpleDateFormat();
             System.out.println(sdf.format(new Date()));
-            System.out.println("requestBody is: "+requestBody);
-            System.out.println("responseBody is: "+response);
+            System.out.println("requestBody is: " + requestBody);
+            System.out.println("responseBody is: " + response);
             exchange.sendResponseHeaders(200, 0);
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());

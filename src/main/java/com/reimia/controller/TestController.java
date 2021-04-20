@@ -1,7 +1,6 @@
-package com.reimia.Controller;
+package com.reimia.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
 public interface TestController {

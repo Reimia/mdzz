@@ -1,4 +1,4 @@
-package com.reimia.Controller;
+package com.reimia.controller;
 
 public class MdzzDTO {
     String param1;
